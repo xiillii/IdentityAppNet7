@@ -27,7 +27,15 @@ builder.Services.AddDbContext<IdentityDbContext>(opts =>
 
 builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<IdentityDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(opts =>
+{
+    opts.Password.RequiredLength = 8;
+    opts.Password.RequireDigit = false;
+    opts.Password.RequireLowercase = false;
+    opts.Password.RequireUppercase = false;
+    opts.Password.RequireNonAlphanumeric = false;
+    opts.SignIn.RequireConfirmedAccount = true;
+}).AddEntityFrameworkStores<IdentityDbContext>();
 
 var emailSenderConfig = builder.Configuration.GetSection("EmailSenderConfiguration").Get<EmailSenderConfiguration>();
 
