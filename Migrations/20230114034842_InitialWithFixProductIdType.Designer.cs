@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityApp.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20230114034325_Initial")]
-    partial class Initial
+    [Migration("20230114034842_InitialWithFixProductIdType")]
+    partial class InitialWithFixProductIdType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace IdentityApp.Migrations
 
             modelBuilder.Entity("IdentityApp.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -50,63 +50,63 @@ namespace IdentityApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 1L,
                             Category = "Watersports",
                             Name = "Kayak",
                             Price = 275m
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 2L,
                             Category = "Watersports",
                             Name = "Lifejacket",
                             Price = 48.95m
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 3L,
                             Category = "Soccer",
                             Name = "Soccer Ball",
                             Price = 19.50m
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 4L,
                             Category = "Soccer",
                             Name = "Corner Flags",
                             Price = 34.95m
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 5L,
                             Category = "Soccer",
                             Name = "Stadium",
                             Price = 79500m
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 6L,
                             Category = "Chess",
                             Name = "Thinking Cap",
                             Price = 16m
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 7L,
                             Category = "Chess",
                             Name = "Unsteady Chair",
                             Price = 29.95m
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 8L,
                             Category = "Chess",
                             Name = "Human Chess Board",
                             Price = 75m
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 9L,
                             Category = "Chess",
                             Name = "Bling-Bling King",
                             Price = 1200m
