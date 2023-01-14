@@ -10,6 +10,11 @@ builder.Services.AddDbContext<ProductDbContext>(opts =>
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:AppDataConnection"]);
 });
 
+builder.Services.AddHttpsRedirection(opts =>
+{
+    opts.HttpsPort = 44350;
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -17,6 +22,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
