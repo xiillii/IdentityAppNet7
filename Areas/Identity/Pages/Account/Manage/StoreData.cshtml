@@ -3,6 +3,7 @@
 
 @{
     ViewData["ActivePage"] = ManageNavPages.StoreData;
+    ViewData["ParentLayout"] = "_InfoLayout";
     var user = await UserManager.GetUserAsync(User);
 }
 
