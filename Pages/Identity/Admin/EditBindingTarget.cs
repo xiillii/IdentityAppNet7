@@ -4,7 +4,7 @@ namespace IdentityApp.Pages.Identity.Admin;
 
 public class EditBindingTarget
 {
-    [Required] public string Username { get; set; }
+    public string? Username { get; set; }
     [Required]
     [EmailAddress]
     public string Email { get; set; }
