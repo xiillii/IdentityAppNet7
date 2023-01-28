@@ -12,11 +12,11 @@ namespace IdentityApp.Pages.Identity
         [Required]
         [EmailAddress]
         [BindProperty]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        [Required] [BindProperty] public string Password { get; set; }
+        [Required] [BindProperty] public string? Password { get; set; }
 
-        [BindProperty(SupportsGet = true)] public string ReturnUrl { get; set; }
+        [BindProperty(SupportsGet = true)] public string? ReturnUrl { get; set; }
 
         public SignInModel(SignInManager<IdentityUser> mgr)
         {
