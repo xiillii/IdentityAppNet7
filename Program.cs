@@ -55,6 +55,13 @@ builder.Services.AddAuthentication()
         opts.ConsumerSecret = builder.Configuration["Twitter:ApiSecret"];
     });
 
+builder.Services.ConfigureApplicationCookie(opts =>
+{
+    opts.LoginPath = "/Identity/SignIn";
+    opts.LogoutPath = "/Identity/SignOut";
+    opts.AccessDeniedPath = "/Identity/Forbidden";
+});
+
 var emailSenderConfig = builder.Configuration.GetSection("EmailSenderConfiguration").Get<EmailSenderConfiguration>();
 
 builder.Services.AddSingleton(emailSenderConfig);

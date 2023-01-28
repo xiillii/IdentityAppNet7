@@ -5,16 +5,16 @@
            class="nav-link bg-secondary text-white">
             @User.Identity.Name
         </a>
-        <a asp-area="Identity" asp-page="/Account/Logout"
+        <a asp-page="/Identity/SignOut"
            class="nav-link bg-secondary text-white">
-            Logout
+            Sign Out
         </a>
     }
     else
     {
-        <a asp-area="Identity" asp-page="/Account/Login"
+        <a asp-page="/Identity/SignIn"
            class="nav-link bg-secondary text-white">
-            Login/Register
+            Sign In/Register
         </a>
     }
 </nav>
