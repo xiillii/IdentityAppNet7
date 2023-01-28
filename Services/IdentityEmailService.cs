@@ -27,4 +27,12 @@ public class IdentityEmailService
         return LinkGenerator.GetUriByPage(ContextAccessor.HttpContext, page, null,
             new { email = emailAddress, token = safeToken });
     }
+
+    public async Task SendPasswordRecoveryEmail(IdentityUser user, string confirmationPage)
+    {
+        var token = await UserManager.GeneratePasswordResetTokenAsync(user);
+        var url = GetUrl(user.Email, token, confirmationPage);
+        await EmailSender.SendEmailAsync(user.Email, "Set Your Password",
+            $"Please set your password by <a href={url}>clicking here</a>.");
+    }
 }
