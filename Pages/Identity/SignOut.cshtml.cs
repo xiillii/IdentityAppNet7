@@ -1,23 +1,23 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace IdentityApp.Pages.Identity
+namespace IdentityApp.Pages.Identity;
+
+[AllowAnonymous]
+public class SignOutModel : UserPageModel
 {
-    public class SignOutModel : UserPageModel
+    public SignInManager<IdentityUser> SignInManager { get; set; }
+
+    public SignOutModel(SignInManager<IdentityUser> mgr)
     {
-        public SignInManager<IdentityUser> SignInManager { get; set; }
+        SignInManager = mgr;
+    }
 
-        public SignOutModel(SignInManager<IdentityUser> mgr)
-        {
-            SignInManager = mgr;
-        }
+    public async Task<IActionResult> OnPostAsync()
+    {
+        await SignInManager.SignOutAsync();
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            await SignInManager.SignOutAsync();
-
-            return RedirectToPage();
-        }
+        return RedirectToPage();
     }
 }

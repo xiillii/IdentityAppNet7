@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace IdentityApp.Pages.Identity.Admin
+namespace IdentityApp.Pages.Identity.Admin;
+
+[AllowAnonymous]
+public class AdminPageModel : PageModel
 {
-    public class AdminPageModel : PageModel
-    {
-    }
 }
