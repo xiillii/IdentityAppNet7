@@ -39,6 +39,11 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
 }).AddEntityFrameworkStores<IdentityDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.FromMinutes(1);
+});
+
 builder.Services.AddScoped<TokenUrlEncoderService>();
 builder.Services.AddScoped<IdentityEmailService>();
 

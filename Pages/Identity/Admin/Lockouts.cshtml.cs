@@ -33,6 +33,8 @@ public class LockoutsModel : AdminPageModel
         await UserManager.SetLockoutEnabledAsync(user, true);
         await UserManager.SetLockoutEndDateAsync(user, DateTimeOffset.Now.AddDays(5));
 
+        await UserManager.UpdateSecurityStampAsync(user);
+
         return RedirectToPage();
     }
 
