@@ -21,6 +21,7 @@ public class DashboardModel : AdminPageModel
     {
         UsersCount = UserManager.Users.Count();
         UsersUnconfirmed= UserManager.Users.Count(u => !u.EmailConfirmed);
+        UsersLockedout = UserManager.Users.Count(u => u.LockoutEnabled && u.LockoutEnd > DateTimeOffset.Now);
     }
 
     public async Task<IActionResult> OnPostAsync()
