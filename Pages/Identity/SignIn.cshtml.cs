@@ -9,6 +9,7 @@ namespace IdentityApp.Pages.Identity
     public class SignInModel : UserPageModel
     {
         public SignInManager<IdentityUser> SignInManager { get; set; }
+        public UserManager<IdentityUser> UserManager { get; set; }
 
         [Required]
         [EmailAddress]
@@ -19,9 +20,10 @@ namespace IdentityApp.Pages.Identity
 
         [BindProperty(SupportsGet = true)] public string? ReturnUrl { get; set; }
 
-        public SignInModel(SignInManager<IdentityUser> mgr)
+        public SignInModel(SignInManager<IdentityUser> mgr, UserManager<IdentityUser> manager)
         {
             SignInManager = mgr;
+            UserManager = manager;
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -39,6 +41,12 @@ namespace IdentityApp.Pages.Identity
                 TempData["message"] = "Account Locked";
             } else if (result.IsNotAllowed)
             {
+                var user = await UserManager.FindByEmailAsync(Email);
+                if (user != null && !await UserManager.IsEmailConfirmedAsync(user)) 
+                {
+                    return RedirectToPage("SignUpConfirm");
+                }
+
                 TempData["message"] = "Sign In Not Allowed";
             } else if (result.RequiresTwoFactor)
             {

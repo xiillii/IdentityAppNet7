@@ -17,7 +17,11 @@ public class DashboardModel : AdminPageModel
 
     private readonly string[] emails = { "alice@example.com", "bob@example.com", "charlie@example.com" };
 
-    public void OnGet() => UsersCount = UserManager.Users.Count();
+    public void OnGet()
+    {
+        UsersCount = UserManager.Users.Count();
+        UsersUnconfirmed= UserManager.Users.Count(u => !u.EmailConfirmed);
+    }
 
     public async Task<IActionResult> OnPostAsync()
     {
