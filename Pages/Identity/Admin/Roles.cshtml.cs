@@ -16,10 +16,13 @@ namespace IdentityApp.Pages.Identity.Admin
         public IList<string> CurrentRoles { get; set; } = new List<string>();
         public IList<string> AvailableRoles { get; set; } = new List<string>();
 
-        public RolesModel(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public string DashboardRole { get; }
+
+        public RolesModel(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config)
         {
             UserManager = userManager;
             RoleManager = roleManager;
+            DashboardRole = config["Dashboard:Role"] ?? "Dashboard";
         }
 
         private async Task SetProperties()
