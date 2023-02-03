@@ -1,3 +1,4 @@
+using IdentityApp;
 using IdentityApp.Models;
 using IdentityApp.Services;
 using Microsoft.AspNetCore.Identity;
@@ -91,5 +92,7 @@ app.UseAuthorization();
 
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
+
+app.SeedUserStoreForDashboard();
 
 app.Run();
