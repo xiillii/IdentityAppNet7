@@ -18,8 +18,10 @@
 @if (showHeader)
 {
     <nav class="navbar navbar-dark bg-@theme">
-        <a class="navbar-brand text-white">IdentityApp</a>
-        <div class="text-white"><partial name="_LoginPartial"/></div>
+        <div class="container-fluid">
+            <a class="navbar-brand text-white">IdentityApp</a>
+            <div class="text-white"><partial name="_LoginPartial"/></div>
+        </div>
     </nav>
 }
 <h4 class="bg-@theme text-center text-white p-2">@banner</h4>
