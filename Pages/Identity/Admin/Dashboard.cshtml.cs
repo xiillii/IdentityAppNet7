@@ -8,14 +8,21 @@ public class DashboardModel : AdminPageModel
 {
     public UserManager<IdentityUser> UserManager { get; set; }
 
-    public DashboardModel(UserManager<IdentityUser> mng) => UserManager = mng;
+    
 
     public int UsersCount { get; set; } = 0;
     public int UsersUnconfirmed { get; set; } = 0;
     public int UsersLockedout { get; set; } = 0;
     public int UsersTwoFactor { get; set; } = 0;
 
-    private readonly string[] emails = { "alice@example.com", "bob@example.com", "charlie@example.com" };
+    private readonly string[] emails = { "alice@example.com", "bob@example.com", "charlie@example.com", "mail@josealonso.dev" };
+
+    public string DashboardRole { get; set; }
+    public DashboardModel(UserManager<IdentityUser> mng, IConfiguration cfg)
+    {
+        UserManager = mng;
+        DashboardRole = cfg["Dashboard:Role"] ?? "Dashboard";
+    }
 
     public void OnGet()
     {
@@ -28,8 +35,12 @@ public class DashboardModel : AdminPageModel
     {
         foreach (var user in UserManager.Users.ToList())
         {
-            var result = await UserManager.DeleteAsync(user);
-            result.Process(ModelState);
+            if (emails.Contains(user.Email) || !await UserManager.IsInRoleAsync(user, DashboardRole))
+            {
+                var result = await UserManager.DeleteAsync(user);
+                result.Process(ModelState);
+            }
+            
         }
         foreach (var email in emails)
         {
