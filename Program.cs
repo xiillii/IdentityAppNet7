@@ -63,6 +63,7 @@ builder.Services.AddAuthentication()
     {
         opts.ConsumerKey = builder.Configuration["Twitter:ApiKey"];
         opts.ConsumerSecret = builder.Configuration["Twitter:ApiSecret"];
+        opts.RetrieveUserDetails = true;
     });
 
 builder.Services.ConfigureApplicationCookie(opts =>

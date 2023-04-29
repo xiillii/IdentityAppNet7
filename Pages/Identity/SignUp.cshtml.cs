@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authentication;
 
 namespace IdentityApp.Pages.Identity;
 
@@ -11,6 +12,7 @@ public class SignUpModel : UserPageModel
 {
     public UserManager<IdentityUser> UserManager { get; set; }
     public IdentityEmailService EmailService { get; set; }
+    public SignInManager<IdentityUser> SignInManager { get; set; }
 
     [BindProperty]
     [Required]
@@ -26,11 +28,16 @@ public class SignUpModel : UserPageModel
     [Compare(nameof(Password))]
     public string? ConfirmPassword { get; set; }
 
-    public SignUpModel(UserManager<IdentityUser> userManager, IdentityEmailService emailService)
+    public IEnumerable<AuthenticationScheme> ExternalSchemes { get; set; }
+
+    public SignUpModel(UserManager<IdentityUser> userManager, IdentityEmailService emailService, SignInManager<IdentityUser> signMgr)
     {
         UserManager = userManager;
-        EmailService = emailService;            
+        EmailService = emailService;     
+        SignInManager = signMgr;
     }
+
+    public async Task OnGetAsync() => ExternalSchemes = await SignInManager.GetExternalAuthenticationSchemesAsync();
 
     public async Task<IActionResult> OnPostAsync()
     {
