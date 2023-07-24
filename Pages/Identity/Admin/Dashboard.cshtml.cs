@@ -15,7 +15,7 @@ public class DashboardModel : AdminPageModel
     public int UsersLockedout { get; set; } = 0;
     public int UsersTwoFactor { get; set; } = 0;
 
-    private readonly string[] emails = { "alice@example.com", "bob@example.com", "charlie@example.com", "mail@josealonso.dev" };
+    private readonly string[] emails = { "alice@example.com", "bob@example.com", "charlie@example.com" };
 
     public string DashboardRole { get; set; }
     public DashboardModel(UserManager<IdentityUser> mng, IConfiguration cfg)

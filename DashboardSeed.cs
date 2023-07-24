@@ -19,7 +19,7 @@ public static class DashboardSeed
 
             var roleName = config["Dashboard:Role"] ?? "Dashboard";
             var userName = config["Dashboard:User"] ?? "mail@josealonso.dev";
-            var password = config["Dashboard:Password"] ?? "mysecret";
+            var password = config["Dashboard:Password"] ?? "JAPnEm-VEK4An-gypKUV";
 
             if (!await roleManager.RoleExistsAsync(roleName))
             {
