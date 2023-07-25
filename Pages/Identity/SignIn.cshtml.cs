@@ -80,7 +80,7 @@ public class SignInModel : UserPageModel
 
         if (result.Succeeded)
         {
-            return Redirect(WebUtility.UrlDecode(ReturnUrl ?? "//"));
+            return Redirect(WebUtility.UrlDecode(ReturnUrl ?? "/"));
         }
         else if (result.IsLockedOut)
         {
